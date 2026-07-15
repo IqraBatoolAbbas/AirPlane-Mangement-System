@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — SkyDeck</title>
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg-ink: #0f172a;
+  --bg-paper: #f8fafc;
+  --bg-sky: #0ea5e9;
+  --bg-amber: #f59e0b;
+  --bg-ok: #22c55e;
+  --bg-bad: #ef4444;
+  --text-slate-deep: #1e293b;
+  --text-slate-soft: #64748b;
+  --text-paper: #f8fafc;
+  --border-ink-line: #1e293b;
+  --border-paper-line: #e2e8f0;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--bg-paper);
+  color: var(--text-slate-deep);
+}
+
+.bg-ink { background-color: var(--bg-ink); }
+.bg-paper { background-color: var(--bg-paper); }
+.bg-sky { background-color: var(--bg-sky); }
+.bg-amber { background-color: var(--bg-amber); }
+.bg-ok { background-color: var(--bg-ok); }
+.bg-bad { background-color: var(--bg-bad); }
+
+.text-slate-deep { color: var(--text-slate-deep); }
+.text-slate-soft { color: var(--text-slate-soft); }
+.text-paper { color: var(--text-paper); }
+.text-sky { color: var(--bg-sky); }
+.text-amber { color: var(--bg-amber); }
+.text-ok { color: var(--bg-ok); }
+.text-bad { color: var(--bg-bad); }
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(14, 165, 233, 0.15);
+}
+.card-body {
+  padding: 1.5rem !important;
+}
+
+.border-ink-line { border-color: var(--border-ink-line); }
+.border-paper-line { border-color: var(--border-paper-line); }
+
+.sidebar {
+  background-color: var(--bg-ink);
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  padding: 1.5rem;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.sidebar .nav-link {
+  color: #e2e8f0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: rgba(14, 165, 233, 0.1);
+  color: var(--bg-sky);
+}
+
+.sidebar .nav-link i {
+  font-size: 1.1rem;
+}
+
+.sidebar .nav-section-title {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.75rem 1rem;
+  margin-top: 1.25rem;
+}
+
+.sidebar .user-profile {
+  border-top: 1px solid var(--border-ink-line);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.sidebar .user-profile .profile-item {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar .user-profile .profile-item p {
+  color: #e2e8f0;
+}
+
+.sidebar .user-profile .profile-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar .logout-btn {
+  color: var(--text-slate-soft);
+  transition: color 0.3s ease;
+}
+
+.sidebar .logout-btn:hover {
+  color: var(--bg-bad);
+}
+
+.main-content {
+  margin-left: 280px;
+  min-height: 100vh;
+}
+
+.topbar {
+  background-color: rgba(248, 250, 252, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-paper-line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--border-paper-line);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.stat-card .icon-box {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.surface {
+  background: white;
+  border: 1px solid var(--border-paper-line);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.surface:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.table-custom {
+  margin: 0;
+}
+
+.table-custom th {
+  background-color: var(--bg-paper);
+  border-bottom: 1px solid var(--border-paper-line);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-slate-soft);
+  padding: 1rem;
+}
+
+.table-custom td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-paper-line);
+  font-size: 0.875rem;
+}
+
+.badge-custom {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-ok { background-color: rgba(34, 197, 94, 0.1); color: var(--bg-ok); }
+.badge-warn { background-color: rgba(245, 158, 11, 0.1); color: var(--bg-amber); }
+.badge-bad { background-color: rgba(239, 68, 68, 0.1); color: var(--bg-bad); }
+.badge-neutral { background-color: rgba(14, 165, 233, 0.1); color: var(--bg-sky); }
+
+.action-card {
+  background: white;
+  border: 1px solid var(--border-paper-line);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.action-card:hover {
+  border-color: var(--bg-sky);
+  background-color: rgba(14, 165, 233, 0.05);
+}
+
+.action-card.danger:hover {
+  border-color: var(--bg-bad);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.btn-primary-custom {
+  background-color: var(--bg-sky);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background-color: #0284c7;
+  color: white;
+}
+
+.btn-ghost-custom {
+  background-color: transparent;
+  color: var(--text-slate-deep);
+  border: 1px solid var(--border-paper-line);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost-custom:hover {
+  background-color: var(--bg-paper);
+  border-color: var(--border-paper-line);
+}
+
+@media (max-width: 991px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    transform: none;
+    min-height: auto;
+    height: auto;
+  }
+  .sidebar.show {
+    transform: none;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  #sidebarToggle,
+  #sidebarClose {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body class="bg-paper text-slate-deep antialiased">
+
+<!-- ============ Sidebar ============ -->
+<aside class="sidebar" id="sidebar">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <a href="index.html" class="d-flex align-items-center gap-2 text-paper font-mono fw-bold text-decoration-none">
+      <span class="brand-mark rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+        <i class="bi bi-airplane-takeoff text-white"></i>
+      </span>
+      AIRPLANE MANAGEMENT SYSTEM
+    </a>
+    <button class="btn btn-link d-lg-none text-paper p-0" id="sidebarClose">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <nav class="flex-1">
+    <p class="nav-section-title">Operations</p>
+    <a href="dashboard.html" class="nav-link active">
+      <i class="bi bi-grid-fill"></i> Home Dashboard
+    </a>
+    <a href="tickets.html" class="nav-link">
+      <i class="bi bi-ticket-perforated"></i> Ticket Management
+    </a>
+    <a href="departures.html" class="nav-link">
+      <i class="bi bi-airplane-takeoff"></i> Departures
+    </a>
+    <a href="arrivals.html" class="nav-link">
+      <i class="bi bi-airplane-landing"></i> Arrivals
+    </a>
+
+    <p class="nav-section-title">Admin</p>
+    <a href="#" class="nav-link">
+      <i class="bi bi-airplane"></i> Fleet &amp; Aircraft
+    </a>
+    <a href="#" class="nav-link">
+      <i class="bi bi-people"></i> Pilots &amp; Crew
+    </a>
+    <a href="settings.html" class="nav-link">
+      <i class="bi bi-gear"></i> Settings
+    </a>
+  </nav>
+
+  <div class="user-profile">
+    <div class="profile-item">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Amelia" alt="" class="rounded-circle bg-ink-soft" style="width: 36px; height: 36px;" />
+      <div class="flex-1 min-w-0">
+        <p class="text-sm fw-bold text-paper mb-0">Amelia Raza</p>
+        <p class="text-xs text-slate-500 mb-0">Front desk officer</p>
+      </div>
+      <a href="login.html" title="Log out" class="logout-btn text-decoration-none">
+        <i class="bi bi-box-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ Main Content ============ -->
+<div class="main-content d-flex flex-column">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container-fluid px-4 py-3">
+      <div class="d-flex align-items-center justify-content-between gap-3">
+        <div class="d-flex align-items-center gap-3">
+          <a href="index.html" class="btn btn-ghost-custom d-none d-sm-inline-flex">
+            <i class="bi bi-arrow-left"></i>
+          </a>
+          <button class="btn btn-link d-lg-none p-0" id="sidebarToggle">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+          <div>
+            <h1 class="h5 fw-extrabold mb-0">Home Dashboard</h1>
+            <p class="small text-slate-soft d-none d-sm-block mb-0">Wednesday, 15 July 2026 · Lahore Hub</p>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-none d-md-flex align-items-center gap-2 bg-white border border-paper-line rounded px-3 py-2" style="width: 256px;">
+            <i class="bi bi-search text-slate-soft"></i>
+            <input type="text" placeholder="Search flight, PNR, passenger…" class="border-0 outline-none text-sm w-full bg-transparent" />
+          </div>
+          <button class="btn btn-light position-relative rounded" style="width: 36px; height: 36px;">
+            <i class="bi bi-bell"></i>
+            <span class="position-absolute top-0 end-0 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+          </button>
+          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Amelia" alt="" class="rounded-circle border border-paper-line" style="width: 36px; height: 36px;" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <main class="flex-1 p-4">
+
+      <!-- Stat cards -->
+      <div class="row g-4 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between mb-3">
+              <div class="icon-box bg-opacity-10 bg-sky">
+                <i class="bi bi-airplane text-sky"></i>
+              </div>
+              <span class="badge badge-custom badge-ok d-flex align-items-center gap-1">
+                <i class="bi bi-arrow-up-right fs-6"></i>4.2%
+              </span>
+            </div>
+            <p class="h3 fw-extrabold font-mono mb-1">128</p>
+            <p class="small text-slate-soft mb-0">Active flights today</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between mb-3">
+              <div class="icon-box bg-opacity-10 bg-amber">
+                <i class="bi bi-ticket-perforated text-amber"></i>
+              </div>
+              <span class="badge badge-custom badge-ok d-flex align-items-center gap-1">
+                <i class="bi bi-arrow-up-right fs-6"></i>11%
+              </span>
+            </div>
+            <p class="h3 fw-extrabold font-mono mb-1">3,047</p>
+            <p class="small text-slate-soft mb-0">Reservations today</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between mb-3">
+              <div class="icon-box bg-opacity-10 bg-ok">
+                <i class="bi bi-person-check text-ok"></i>
+              </div>
+              <span class="badge badge-custom badge-bad d-flex align-items-center gap-1">
+                <i class="bi bi-arrow-down-right fs-6"></i>2.1%
+              </span>
+            </div>
+            <p class="h3 fw-extrabold font-mono mb-1">2,214</p>
+            <p class="small text-slate-soft mb-0">Checked-in passengers</p>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between mb-3">
+              <div class="icon-box bg-opacity-10 bg-sky">
+                <i class="bi bi-currency-dollar text-sky"></i>
+              </div>
+              <span class="badge badge-custom badge-ok d-flex align-items-center gap-1">
+                <i class="bi bi-arrow-up-right fs-6"></i>8.6%
+              </span>
+            </div>
+            <p class="h3 fw-extrabold font-mono mb-1">$412K</p>
+            <p class="small text-slate-soft mb-0">Revenue today</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <!-- Recent reservations cards -->
+        <div class="col-xl-8">
+          <div class="surface">
+            <div class="d-flex align-items-center justify-content-between px-4 py-3 border-bottom border-paper-line">
+              <h5 class="fw-bold mb-0">Recent reservations</h5>
+              <a href="tickets.html" class="text-decoration-none small fw-bold text-sky">
+                View all <i class="bi bi-chevron-right"></i>
+              </a>
+            </div>
+            <div class="p-4">
+              <div class="row g-3">
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border border-paper-line" style="transition: all 0.3s ease;">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-custom badge-neutral">PK-88214</span>
+                        <span class="badge badge-custom badge-ok">Confirmed</span>
+                      </div>
+                      <h6 class="fw-bold mb-1">Hassan Iqbal</h6>
+                      <p class="small text-slate-soft mb-2">PA-402</p>
+                      <p class="small text-slate-soft mb-0">LHE → DXB · 15 Jul</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border border-paper-line" style="transition: all 0.3s ease;">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-custom badge-neutral">PK-88215</span>
+                        <span class="badge badge-custom badge-warn">Pending</span>
+                      </div>
+                      <h6 class="fw-bold mb-1">Sara Wallace</h6>
+                      <p class="small text-slate-soft mb-2">PA-118</p>
+                      <p class="small text-slate-soft mb-0">KHI → LHR · 15 Jul</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border border-paper-line" style="transition: all 0.3s ease;">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-custom badge-neutral">PK-88216</span>
+                        <span class="badge badge-custom badge-ok">Confirmed</span>
+                      </div>
+                      <h6 class="fw-bold mb-1">Bilal Ahmed</h6>
+                      <p class="small text-slate-soft mb-2">PA-905</p>
+                      <p class="small text-slate-soft mb-0">ISB → JED · 16 Jul</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border border-paper-line" style="transition: all 0.3s ease;">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-custom badge-neutral">PK-88217</span>
+                        <span class="badge badge-custom badge-bad">Cancelled</span>
+                      </div>
+                      <h6 class="fw-bold mb-1">Fatima Noor</h6>
+                      <p class="small text-slate-soft mb-2">PA-227</p>
+                      <p class="small text-slate-soft mb-0">LHE → IST · 16 Jul</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border border-paper-line" style="transition: all 0.3s ease;">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-custom badge-neutral">PK-88218</span>
+                        <span class="badge badge-custom badge-ok">Confirmed</span>
+                      </div>
+                      <h6 class="fw-bold mb-1">Omar Farooq</h6>
+                      <p class="small text-slate-soft mb-2">PA-402</p>
+                      <p class="small text-slate-soft mb-0">LHE → DXB · 15 Jul</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next departures mini board -->
+        <div class="col-xl-4">
+          <div class="surface p-4 h-100">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h5 class="fw-bold mb-0">Next departures</h5>
+              <i class="bi bi-airplane-takeoff text-slate-soft"></i>
+            </div>
+            <div class="d-flex flex-column gap-3">
+              <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                <div>
+                  <h6 class="fw-bold font-mono mb-1">PA402</h6>
+                  <p class="small text-slate-soft mb-0">LHE → DXB · Gate A12</p>
+                </div>
+                <span class="badge badge-custom badge-ok">On time</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                <div>
+                  <h6 class="fw-bold font-mono mb-1">PA118</h6>
+                  <p class="small text-slate-soft mb-0">KHI → LHR · Gate B04</p>
+                </div>
+                <span class="badge badge-custom badge-warn">Boarding</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                <div>
+                  <h6 class="fw-bold font-mono mb-1">PA905</h6>
+                  <p class="small text-slate-soft mb-0">ISB → JED · Gate C09</p>
+                </div>
+                <span class="badge badge-custom badge-bad">Delayed</span>
+              </div>
+            </div>
+            <a href="departures.html" class="btn btn-ghost-custom w-full mt-4">
+              Open full board <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick admin actions -->
+      <div class="surface p-4 mb-4">
+        <h5 class="fw-bold mb-3">Quick actions</h5>
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <div class="action-card">
+              <i class="bi bi-plus-circle text-sky fs-4"></i>
+              <span class="small fw-bold">Add flight</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="action-card">
+              <i class="bi bi-airplane text-sky fs-4"></i>
+              <span class="small fw-bold">Add aircraft</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="action-card">
+              <i class="bi bi-people text-sky fs-4"></i>
+              <span class="small fw-bold">Assign crew</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="action-card danger">
+              <i class="bi bi-x-circle text-bad fs-4"></i>
+              <span class="small fw-bold">Cancel flight</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="px-4 py-3 border-top border-paper-line text-xs text-slate-soft d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+      <p class="mb-0">© 2026 Airplane Management System. All rights reserved.</p>
+      <p class="font-mono mb-0">STATUS: <span class="text-ok">ALL SYSTEMS ON TIME</span></p>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
