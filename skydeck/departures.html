@@ -278,8 +278,8 @@ body {
 <aside class="sidebar" id="sidebar">
   <div class="d-flex align-items-center justify-content-between mb-4">
     <a href="index.html" class="d-flex align-items-center gap-2 text-paper font-mono fw-bold text-decoration-none">
-      <span class="brand-mark rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-        <i class="bi bi-airplane-takeoff text-white"></i>
+      <span class="brand-mark">
+        <img src="images/logo.jpg" alt="Logo" class="img-fluid">
       </span>
       AIRPLANE MANAGEMENT SYSTEM
     </a>
@@ -304,10 +304,10 @@ body {
     </a>
 
     <p class="nav-section-title">Admin</p>
-    <a href="#" class="nav-link">
+    <a href="fleet.html" class="nav-link">
       <i class="bi bi-airplane"></i> Fleet &amp; Aircraft
     </a>
-    <a href="#" class="nav-link">
+    <a href="crew.html" class="nav-link">
       <i class="bi bi-people"></i> Pilots &amp; Crew
     </a>
     <a href="settings.html" class="nav-link">
@@ -375,6 +375,7 @@ body {
                 <th>Time</th>
                 <th>Flight</th>
                 <th>Destination</th>
+                <th>Luggage</th>
                 <th>Gate</th>
                 <th>Terminal</th>
                 <th class="text-end">Status</th>
@@ -386,6 +387,7 @@ body {
                 <td><span class="flap-text">0620</span></td>
                 <td><span class="flap-text">PA402</span></td>
                 <td class="fw-semibold">Dubai (DXB)</td>
+                <td><small class="badge bg-info">25-35kg</small></td>
                 <td class="font-mono text-slate-soft">A12</td>
                 <td class="font-mono text-slate-soft">T1</td>
                 <td class="text-end"><span class="badge badge-custom badge-ok">On time</span></td>
@@ -395,6 +397,7 @@ body {
                 <td><span class="flap-text">0705</span></td>
                 <td><span class="flap-text">PA118</span></td>
                 <td class="fw-semibold">London (LHR)</td>
+                <td><small class="badge bg-info">25-35kg</small></td>
                 <td class="font-mono text-slate-soft">B04</td>
                 <td class="font-mono text-slate-soft">T1</td>
                 <td class="text-end"><span class="badge badge-custom badge-warn">Boarding</span></td>
@@ -404,6 +407,7 @@ body {
                 <td><span class="flap-text">0740</span></td>
                 <td><span class="flap-text">PA905</span></td>
                 <td class="fw-semibold">Jeddah (JED)</td>
+                <td><small class="badge bg-info">20-30kg</small></td>
                 <td class="font-mono text-slate-soft">C09</td>
                 <td class="font-mono text-slate-soft">T2</td>
                 <td class="text-end"><span class="badge badge-custom badge-bad">Delayed 35m</span></td>
@@ -413,6 +417,7 @@ body {
                 <td><span class="flap-text">0815</span></td>
                 <td><span class="flap-text">PA227</span></td>
                 <td class="fw-semibold">Istanbul (IST)</td>
+                <td><small class="badge bg-info">25-35kg</small></td>
                 <td class="font-mono text-slate-soft">A03</td>
                 <td class="font-mono text-slate-soft">T1</td>
                 <td class="text-end"><span class="badge badge-custom badge-ok">On time</span></td>
@@ -422,6 +427,7 @@ body {
                 <td><span class="flap-text">0850</span></td>
                 <td><span class="flap-text">PA063</span></td>
                 <td class="fw-semibold">Doha (DOH)</td>
+                <td><small class="badge bg-info">23-32kg</small></td>
                 <td class="font-mono text-slate-soft">—</td>
                 <td class="font-mono text-slate-soft">T1</td>
                 <td class="text-end"><span class="badge badge-custom badge-bad">Cancelled</span></td>
@@ -431,6 +437,48 @@ body {
                 <td><span class="flap-text">0930</span></td>
                 <td><span class="flap-text">PA511</span></td>
                 <td class="fw-semibold">Riyadh (RUH)</td>
+                <td><small class="badge bg-info">20-30kg</small></td>
+                <td class="font-mono text-slate-soft">B11</td>
+                <td class="font-mono text-slate-soft">T2</td>
+                <td class="text-end"><span class="badge badge-custom badge-ok">On time</span></td>
+              </tr>
+              </tr>
+
+              <tr>
+                <td><span class="flap-text">0740</span></td>
+                <td><span class="flap-text">PA905</span></td>
+                <td class="fw-semibold">Jeddah (JED)</td>
+                <td><small class="badge bg-info">20-30kg</small></td>
+                <td class="font-mono text-slate-soft">C09</td>
+                <td class="font-mono text-slate-soft">T2</td>
+                <td class="text-end"><span class="badge badge-custom badge-bad">Delayed 35m</span></td>
+              </tr>
+
+              <tr>
+                <td><span class="flap-text">0815</span></td>
+                <td><span class="flap-text">PA227</span></td>
+                <td class="fw-semibold">Istanbul (IST)</td>
+                <td><small class="badge bg-info">25-35kg</small></td>
+                <td class="font-mono text-slate-soft">A03</td>
+                <td class="font-mono text-slate-soft">T1</td>
+                <td class="text-end"><span class="badge badge-custom badge-ok">On time</span></td>
+              </tr>
+
+              <tr>
+                <td><span class="flap-text">0850</span></td>
+                <td><span class="flap-text">PA063</span></td>
+                <td class="fw-semibold">Doha (DOH)</td>
+                <td><small class="badge bg-info">23-32kg</small></td>
+                <td class="font-mono text-slate-soft">—</td>
+                <td class="font-mono text-slate-soft">T1</td>
+                <td class="text-end"><span class="badge badge-custom badge-bad">Cancelled</span></td>
+              </tr>
+
+              <tr>
+                <td><span class="flap-text">0930</span></td>
+                <td><span class="flap-text">PA511</span></td>
+                <td class="fw-semibold">Riyadh (RUH)</td>
+                <td><small class="badge bg-info">20-30kg</small></td>
                 <td class="font-mono text-slate-soft">B11</td>
                 <td class="font-mono text-slate-soft">T2</td>
                 <td class="text-end"><span class="badge badge-custom badge-ok">On time</span></td>
@@ -450,8 +498,47 @@ body {
   </div>
 </div>
 
-</body>
-</html>
+<script>
+// Departures Filter Functionality
+document.querySelectorAll('.filter-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const filterValue = this.dataset.filter;
+    const rows = document.querySelectorAll('.board-table tbody tr');
+    
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active');
+    
+    // Filter rows
+    rows.forEach(row => {
+      let statusText = row.querySelector('td:last-child span').textContent.trim().toLowerCase();
+      
+      if (filterValue === 'all') {
+        row.style.display = '';
+      } else if (filterValue === 'on time' && statusText.includes('on time')) {
+        row.style.display = '';
+      } else if (filterValue === 'boarding' && statusText.includes('boarding')) {
+        row.style.display = '';
+      } else if (filterValue === 'delayed' && statusText.includes('delayed')) {
+        row.style.display = '';
+      } else if (filterValue === 'cancelled' && statusText.includes('cancelled')) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Sidebar Toggle for Mobile
+document.getElementById('sidebarToggle')?.addEventListener('click', function() {
+  document.getElementById('sidebar').classList.toggle('show');
+});
+
+document.getElementById('sidebarClose')?.addEventListener('click', function() {
+  document.getElementById('sidebar').classList.remove('show');
+});
+</script>
 
 
 

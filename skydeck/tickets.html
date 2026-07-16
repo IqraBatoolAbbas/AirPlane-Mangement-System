@@ -20,8 +20,8 @@
 <aside class="sidebar-app" id="sidebar">
   <div class="d-flex align-items-center justify-content-between mb-4">
     <a href="index.html" class="d-flex align-items-center gap-2 text-paper font-mono fw-bold text-decoration-none">
-      <span class="brand-mark brand-mark--sm rounded-circle d-flex align-items-center justify-content-center">
-        <i class="bi bi-airplane-takeoff text-white"></i>
+      <span class="brand-mark">
+        <img src="images/logo.jpg" alt="Logo" class="img-fluid">
       </span>
       AIRPLANE MANAGEMENT SYSTEM
     </a>
@@ -46,10 +46,10 @@
     </a>
 
     <p class="nav-section-title">Admin</p>
-    <a href="#" class="nav-link">
+    <a href="fleet.html" class="nav-link">
       <i class="bi bi-airplane"></i> Fleet &amp; Aircraft
     </a>
-    <a href="#" class="nav-link">
+    <a href="crew.html" class="nav-link">
       <i class="bi bi-people"></i> Pilots &amp; Crew
     </a>
     <a href="settings.html" class="nav-link">
@@ -91,7 +91,7 @@
           </div>
         </div>
         <button class="btn btn-primary-custom" id="newReservationBtn">
-          <i class="bi bi-plus-lg me-2"></i> New reservation
+          <i class="bi bi-plus-lg me-2"></i> <a href="booking.html" class="text-white text-decoration-none">Book New Ticket</a>
         </button>
       </div>
     </div>
@@ -138,6 +138,11 @@
                 </div>
               </div>
               <p class="small text-slate-soft mb-3">LHE → DXB · 15 Jul</p>
+              <div class="mb-3 p-2 bg-light rounded">
+                <p class="small text-slate-soft mb-2"><i class="bi bi-cup-hot me-1"></i><strong>Lunch Options:</strong></p>
+                <small>• Chicken Biryani: PKR 800 | • Vegetable Pulao: PKR 600</small>
+              </div>
+              <small class="d-block mb-3 text-slate-soft"><i class="bi bi-bag me-1"></i>Luggage Allowance: 25kg-35kg</small>
               <button class="btn btn-primary-custom btn-checkin btn-ticket-action">
                 <i class="bi bi-check-lg me-1"></i> Check in
               </button>
@@ -168,6 +173,11 @@
                 </div>
               </div>
               <p class="small text-slate-soft mb-3">KHI → LHR · 15 Jul</p>
+              <div class="mb-3 p-2 bg-light rounded">
+                <p class="small text-slate-soft mb-2"><i class="bi bi-cup-hot me-1"></i><strong>Lunch Options:</strong></p>
+                <small>• Fish Curry: PKR 900 | • Paneer Butter Masala: PKR 750</small>
+              </div>
+              <small class="d-block mb-3 text-slate-soft"><i class="bi bi-bag me-1"></i>Luggage Allowance: 25kg-35kg</small>
               <button class="btn btn-ghost-custom btn-checkout btn-ticket-action">
                 <i class="bi bi-x-lg me-1"></i> Check out
               </button>
@@ -198,6 +208,11 @@
                 </div>
               </div>
               <p class="small text-slate-soft mb-3">ISB → JED · 16 Jul</p>
+              <div class="mb-3 p-2 bg-light rounded">
+                <p class="small text-slate-soft mb-2"><i class="bi bi-cup-hot me-1"></i><strong>Lunch Options:</strong></p>
+                <small>• Samosas & Chai: PKR 400 | • Mixed Fruits: PKR 500</small>
+              </div>
+              <small class="d-block mb-3 text-slate-soft"><i class="bi bi-bag me-1"></i>Luggage Allowance: 20kg-30kg</small>
               <button class="btn btn-primary-custom btn-checkin btn-ticket-action">
                 <i class="bi bi-check-lg me-1"></i> Check in
               </button>
@@ -228,6 +243,11 @@
                 </div>
               </div>
               <p class="small text-slate-soft mb-3">LHE → IST · 16 Jul</p>
+              <div class="mb-3 p-2 bg-light rounded">
+                <p class="small text-slate-soft mb-2"><i class="bi bi-cup-hot me-1"></i><strong>Lunch Options:</strong></p>
+                <small>• Turkish Kebab: PKR 1000 | • Mezze Platter: PKR 850</small>
+              </div>
+              <small class="d-block mb-3 text-slate-soft"><i class="bi bi-bag me-1"></i>Luggage Allowance: 25kg-35kg</small>
               <button class="btn btn-primary-custom btn-checkin btn-ticket-action" disabled>
                 <i class="bi bi-x-lg me-1"></i> Check in
               </button>
@@ -258,6 +278,11 @@
                 </div>
               </div>
               <p class="small text-slate-soft mb-3">LHE → DXB · 15 Jul</p>
+              <div class="mb-3 p-2 bg-light rounded">
+                <p class="small text-slate-soft mb-2"><i class="bi bi-cup-hot me-1"></i><strong>Lunch Options:</strong></p>
+                <small>• Chicken Biryani: PKR 800 | • Vegetable Pulao: PKR 600</small>
+              </div>
+              <small class="d-block mb-3 text-slate-soft"><i class="bi bi-bag me-1"></i>Luggage Allowance: 25kg-35kg</small>
               <button class="btn btn-ghost-custom btn-checkout btn-ticket-action">
                 <i class="bi bi-x-lg me-1"></i> Check out
               </button>
@@ -288,6 +313,11 @@
                 </div>
               </div>
               <p class="small text-slate-soft mb-3">KHI → LHR · 15 Jul</p>
+              <div class="mb-3 p-2 bg-light rounded">
+                <p class="small text-slate-soft mb-2"><i class="bi bi-cup-hot me-1"></i><strong>Lunch Options:</strong></p>
+                <small>• Fish Curry: PKR 900 | • Paneer Butter Masala: PKR 750</small>
+              </div>
+              <small class="d-block mb-3 text-slate-soft"><i class="bi bi-bag me-1"></i>Luggage Allowance: 25kg-35kg</small>
               <button class="btn btn-primary-custom btn-checkin btn-ticket-action">
                 <i class="bi bi-check-lg me-1"></i> Check in
               </button>
@@ -305,60 +335,48 @@
   </div>
 </div>
 
-<!-- ============ New reservation drawer ============ -->
-<div class="drawer-scrim" id="drawerScrim"></div>
-<aside class="drawer d-flex flex-column" id="drawer">
-  <div class="d-flex align-items-center justify-content-between px-4 py-3 border-bottom border-paper-line">
-    <h5 class="fw-bold mb-0">New reservation</h5>
-    <button class="btn btn-link p-0" id="drawerClose">
-      <i class="bi bi-x-lg"></i>
-    </button>
-  </div>
-  <form class="flex-1 overflow-y-auto px-4 py-4 d-flex flex-column gap-3">
-    <div>
-      <label class="form-label small fw-bold text-uppercase text-slate-soft">Passenger name</label>
-      <input type="text" required placeholder="e.g. Zainab Tariq" class="form-control" />
-    </div>
-    <div class="row g-3">
-      <div class="col-6">
-        <label class="form-label small fw-bold text-uppercase text-slate-soft">Flight number</label>
-        <input type="text" required placeholder="PA-402" class="form-control font-mono" />
-      </div>
-      <div class="col-6">
-        <label class="form-label small fw-bold text-uppercase text-slate-soft">Seat</label>
-        <input type="text" placeholder="14C" class="form-control font-mono" />
-      </div>
-    </div>
-    <div class="row g-3">
-      <div class="col-6">
-        <label class="form-label small fw-bold text-uppercase text-slate-soft">From</label>
-        <input type="text" required placeholder="LHE" class="form-control font-mono" />
-      </div>
-      <div class="col-6">
-        <label class="form-label small fw-bold text-uppercase text-slate-soft">To</label>
-        <input type="text" required placeholder="DXB" class="form-control font-mono" />
-      </div>
-    </div>
-    <div>
-      <label class="form-label small fw-bold text-uppercase text-slate-soft">Passengers on itinerary</label>
-      <input type="number" min="1" value="1" class="form-control" />
-    </div>
-    <div>
-      <label class="form-label small fw-bold text-uppercase text-slate-soft">Payment method</label>
-      <select class="form-select">
-        <option>Credit / debit card</option>
-        <option>Bank transfer</option>
-        <option>Wallet</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary-custom mt-auto">
-      Create reservation <i class="bi bi-check-lg ms-2"></i>
-    </button>
-  </form>
-</aside>
 
-</body>
-</html>
+<script>
+// Tickets Filter Functionality
+document.querySelectorAll('.filter-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const filterValue = this.dataset.filter;
+    const cards = document.querySelectorAll('.ticket-card');
+    
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active');
+    
+    // Filter cards
+    cards.forEach(card => {
+      const statusBadge = card.querySelector('.badge-custom:last-of-type');
+      const statusText = statusBadge ? statusBadge.textContent.trim().toLowerCase() : '';
+      
+      if (filterValue === 'all') {
+        card.closest('.col-md-6').style.display = '';
+      } else if (filterValue === 'confirmed' && statusText.includes('confirmed')) {
+        card.closest('.col-md-6').style.display = '';
+      } else if (filterValue === 'checked-in' && statusText.includes('checked in')) {
+        card.closest('.col-md-6').style.display = '';
+      } else if (filterValue === 'cancelled' && statusText.includes('cancelled')) {
+        card.closest('.col-md-6').style.display = '';
+      } else {
+        card.closest('.col-md-6').style.display = 'none';
+      }
+    });
+  });
+});
+
+// Sidebar Toggle for Mobile
+document.getElementById('sidebarToggle')?.addEventListener('click', function() {
+  document.getElementById('sidebar').classList.toggle('show');
+});
+
+document.getElementById('sidebarClose')?.addEventListener('click', function() {
+  document.getElementById('sidebar').classList.remove('show');
+});
+
+</script>
 
 
 

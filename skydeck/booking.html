@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book a Flight — Airplane Management System</title>
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link href="assets/style.css" rel="stylesheet" />
+<style>
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #1e293b;
+  }
+
+  .navbar-custom {
+    background-color: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .booking-container {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.3);
+    padding: 2rem;
+  }
+
+  .flight-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .flight-card:hover {
+    border-color: #0ea5e9;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .flight-card.selected {
+    border-color: #0ea5e9;
+    background-color: rgba(14, 165, 233, 0.05);
+  }
+
+  .flight-time {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.75rem;
+  }
+
+  .flight-route {
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .passenger-form {
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .meal-section {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-primary-custom {
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary-custom:hover {
+    background-color: #0284c7;
+    color: white;
+  }
+
+  .step-indicator {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #94a3b8;
+  }
+
+  .step.active {
+    color: #0ea5e9;
+  }
+
+  .step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  .step.active .step-number {
+    background: #0ea5e9;
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Navigation ============ -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-bold" href="index.html">
+      <span class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(14, 165, 233, 0.2); border-radius: 50%;">
+        <i class="bi bi-airplane-takeoff text-white"></i>
+      </span>
+      <span>AIRPLANE MANAGEMENT SYSTEM</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-lg-3">
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="departures.html">Live Board</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="login.html">Admin Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ Main Content ============ -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      
+      <!-- Step Indicator -->
+      <div class="step-indicator">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <span>Select Flight</span>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <span>Passenger Details</span>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <span>Add-ons & Payment</span>
+        </div>
+      </div>
+
+      <div class="booking-container">
+        <div id="step1" class="step-content">
+        <h1 class="fw-bold mb-4"><i class="bi bi-airplane me-2"></i>Book Your Flight</h1>
+
+        <!-- Search Form -->
+        <div class="row g-3 mb-5">
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-uppercase text-slate-soft small">From</label>
+            <input type="text" class="form-control" placeholder="City/Airport" value="LHE" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-uppercase text-slate-soft small">To</label>
+            <input type="text" class="form-control" placeholder="City/Airport" value="DXB" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-uppercase text-slate-soft small">Departure</label>
+            <input type="date" class="form-control" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-uppercase text-slate-soft small">Passengers</label>
+            <select class="form-select">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn btn-primary-custom mb-4 w-100">
+          <i class="bi bi-search me-2"></i> Search Flights
+        </button>
+
+        <!-- Available Flights -->
+        <h5 class="fw-bold mb-3">Available Flights</h5>
+
+        <div class="flight-card selected">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <div class="flight-time">0620</div>
+              <small class="flight-route">LHE</small>
+            </div>
+            <div class="col-md-4">
+              <small class="text-slate-soft d-block mb-1">Duration: 2h 30m</small>
+              <div class="progress" style="height: 2px;">
+                <div class="progress-bar" style="width: 50%"></div>
+              </div>
+              <small class="text-slate-soft d-block mt-1">1 Stop</small>
+            </div>
+            <div class="col-md-2">
+              <div class="flight-time">0850</div>
+              <small class="flight-route">DXB</small>
+            </div>
+            <div class="col-md-2">
+              <div>
+                <strong class="d-block">PA-402</strong>
+                <small class="text-slate-soft">Airbus A320</small>
+              </div>
+            </div>
+            <div class="col-md-2 text-end">
+              <div class="fw-bold" style="color: #0ea5e9; font-size: 1.5rem;">PKR 8,500</div>
+              <small class="text-slate-soft">per person</small>
+            </div>
+          </div>
+          <div class="mt-3 p-3 bg-light rounded">
+            <div class="d-flex gap-2 flex-wrap">
+              <span class="badge bg-success">Luggage: 25-35kg</span>
+              <span class="badge bg-info">Lunch Included</span>
+              <span class="badge bg-warning">2 hrs before boarding</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flight-card">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <div class="flight-time">0705</div>
+              <small class="flight-route">LHE</small>
+            </div>
+            <div class="col-md-4">
+              <small class="text-slate-soft d-block mb-1">Duration: 2h 45m</small>
+              <div class="progress" style="height: 2px;">
+                <div class="progress-bar" style="width: 55%"></div>
+              </div>
+              <small class="text-slate-soft d-block mt-1">Direct Flight</small>
+            </div>
+            <div class="col-md-2">
+              <div class="flight-time">0950</div>
+              <small class="flight-route">DXB</small>
+            </div>
+            <div class="col-md-2">
+              <div>
+                <strong class="d-block">PA-118</strong>
+                <small class="text-slate-soft">Boeing 777</small>
+              </div>
+            </div>
+            <div class="col-md-2 text-end">
+              <div class="fw-bold" style="color: #0ea5e9; font-size: 1.5rem;">PKR 9,200</div>
+              <small class="text-slate-soft">per person</small>
+            </div>
+          </div>
+          <div class="mt-3 p-3 bg-light rounded">
+            <div class="d-flex gap-2 flex-wrap">
+              <span class="badge bg-success">Luggage: 25-35kg</span>
+              <span class="badge bg-info">Lunch Included</span>
+              <span class="badge bg-warning">1.5 hrs before boarding</span>
+            </div>
+          </div>
+        </div>
+        </div>
+        <!-- Passenger Details -->
+         <div id="step2" class="step-content" style="display:none;">
+        <h5 class="fw-bold mb-3 mt-4">Passenger Details</h5>
+        <div class="passenger-form">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label fw-bold">Full Name</label>
+              <input type="text" class="form-control" placeholder="e.g. John Doe" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Email</label>
+              <input type="email" class="form-control" placeholder="your@email.com" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Phone Number</label>
+              <input type="tel" class="form-control" placeholder="+92 300 1234567" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Passport/ID Number</label>
+              <input type="text" class="form-control" placeholder="ABC123456" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Date of Birth</label>
+              <input type="date" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Meal Selection -->
+        <h5 class="fw-bold mb-3">Meal Preference</h5>
+
+        <div class="meal-section">
+          <p class="small text-slate-soft mb-3"><i class="bi bi-cup-hot me-2"></i><strong>Special Lunch Meals Available (PA-402):</strong></p>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="meal" id="meal1" value="biryani" checked />
+            <label class="form-check-label" for="meal1">
+              <strong>Chicken Biryani</strong> - PKR 800
+            </label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="meal" id="meal2" value="pulao" />
+            <label class="form-check-label" for="meal2">
+              <strong>Vegetable Pulao</strong> - PKR 600
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="meal" id="meal3" value="none" />
+            <label class="form-check-label" for="meal3">
+              <strong>No Meal</strong> - Free
+            </label>
+          </div>
+        </div>
+
+        <!-- Extra Luggage -->
+        <h5 class="fw-bold mb-3">Extra Luggage</h5>
+        <p class="small text-slate-soft mb-3">Standard allowance: 25-35 kg per passenger</p>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" id="extraLuggage" />
+          <label class="form-check-label" for="extraLuggage">
+            Add extra luggage (10 kg) - PKR 500
+          </label>
+        </div>
+         </div>
+        <!-- Payment Method -->
+         <div id="step3" class="step-content" style="display:none;"></div>
+        <h5 class="fw-bold mb-3 mt-4">Payment Method</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment" id="card" checked />
+              <label class="form-check-label" for="card">
+                <i class="bi bi-credit-card me-2"></i>Credit/Debit Card
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment" id="bank" />
+              <label class="form-check-label" for="bank">
+                <i class="bi bi-bank me-2"></i>Bank Transfer
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment" id="wallet" />
+              <label class="form-check-label" for="wallet">
+                <i class="bi bi-wallet2 me-2"></i>Digital Wallet
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="alert alert-light border border-slate-soft mt-4 p-3">
+          <h6 class="fw-bold mb-3">Booking Summary</h6>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Flight PA-402 (1 passenger)</span>
+            <span class="fw-bold">PKR 8,500</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Chicken Biryani Meal</span>
+            <span class="fw-bold">PKR 800</span>
+          </div>
+          <div class="d-flex justify-content-between mb-3">
+            <span>Extra Luggage (10kg)</span>
+            <span class="fw-bold">PKR 500</span>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between">
+            <span class="fw-bold">Total Amount</span>
+            <span class="fw-bold" style="color: #0ea5e9; font-size: 1.25rem;">PKR 9,800</span>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-3 mt-4">
+          <a href="index.html" class="btn btn-outline-secondary flex-1">Cancel</a>
+          <button class="btn btn-primary-custom flex-1">
+            <i class="bi bi-check-lg me-2"></i> Complete Booking
+          </button>
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-4 mt-5 text-white-50 small">
+  <div class="container">
+    <p class="mb-0">© 2026 Airplane Management System. All rights reserved. | <a href="#" class="text-white-50 text-decoration-none">Terms</a> | <a href="#" class="text-white-50 text-decoration-none">Privacy</a></p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Flight selection
+document.querySelectorAll('.flight-card').forEach(card => {
+  card.addEventListener('click', function() {
+    document.querySelectorAll('.flight-card').forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+function nextStep(stepNumber) {
+    // Sab steps hide karo
+    document.querySelectorAll('.step-content').forEach(s => s.style.display = 'none');
+    // Sirf target step show karo
+    document.getElementById('step' + stepNumber).style.display = 'block';
+    
+    // Step Indicator update karo
+    document.querySelectorAll('.step').forEach((s, index) => {
+        if(index + 1 === stepNumber) s.classList.add('active');
+        else s.classList.remove('active');
+    });
+}
+</script>
+
+</body>
+</html>
